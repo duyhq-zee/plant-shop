@@ -4,9 +4,17 @@
         <servlet-name>loginServlet</servlet-name>
         <servlet-class>duyhq.servlet.loginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>registerServlet</servlet-name>
+        <servlet-class>duyhq.servlet.registerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>registerServlet</servlet-name>
+        <url-pattern>/registerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -9,8 +9,26 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="mycss.css" type="text/css" />
     </head>
     <body>
-        <p>Welcome</p>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href=""><img src="images/logo.jpg"></a> </li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="registration.html">Register</a></li>
+                    <li><a href="login.html" >Login</a></li>
+                    <li><form action="searchServlet" method="post" class="formsearch">
+                            <input type="text" name="txtsearch">
+                            <select name=”searchby”> <option value=”byname”>by name</option><option value=”bycate”>by category</option> </select>
+                            <input type="submit" value="search" name="action" >
+                        </form></li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <p>Welcome</p>
+        </section>
     </body>
 </html>
