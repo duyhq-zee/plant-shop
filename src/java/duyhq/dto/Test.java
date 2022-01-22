@@ -6,6 +6,7 @@
 package duyhq.dto;
 
 import duyhq.dao.AccountDAO;
+import duyhq.dao.PlantDAO;
 import duyhq.dto.Account;
 import java.util.ArrayList;
 
@@ -30,9 +31,14 @@ public class Test {
 
 //        System.out.println(AccountDAO.insertAccount("c@gmail.com", "newPassword", "newFullname", "123456789", 1, 0));
         
-        ArrayList<Account> accounts = AccountDAO.getAccounts();
-        for (Account account: accounts) {
-            System.out.println(account.getEmail() + " " + account.getFullname() + " " + account.getPassword() + " " + account.getPhone());
+//        ArrayList<Account> accounts = AccountDAO.getAccounts();
+//        for (Account account: accounts) {
+//            System.out.println(account.getEmail() + " " + account.getFullname() + " " + account.getPassword() + " " + account.getPhone());
+//        }
+        
+        ArrayList<Plant> plants = PlantDAO.getPlants("monstera", "byname");
+        for (Plant plant: plants) {
+            System.out.println(plant.getName());
         }
     }
 }
