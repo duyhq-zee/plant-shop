@@ -28,6 +28,10 @@
         <servlet-name>contactServlet</servlet-name>
         <servlet-class>duyhq.servlet.contactServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>mainController</servlet-name>
+        <servlet-class>duyhq.servlet.mainController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
@@ -48,12 +52,16 @@
         <servlet-name>contactServlet</servlet-name>
         <url-pattern>/contactServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mainController</servlet-name>
+        <url-pattern>/mainController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>login.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
