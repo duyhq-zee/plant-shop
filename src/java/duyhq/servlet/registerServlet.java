@@ -8,6 +8,7 @@ package duyhq.servlet;
 import duyhq.dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +41,10 @@ public class registerServlet extends HttpServlet {
             int status = 1;
             int role = 0;
             if (AccountDAO.insertAccount(email, password, fullname, phone, status, role)) {
-                response.sendRedirect("index.html");
+//                response.sendRedirect("index.html");
+                request.setAttribute("email_newAccount", email);
+                RequestDispatcher rd = request.getRequestDispatcher("sendOTP");
+                rd.forward(request, response);
             } else {
                 response.sendRedirect("errorpage.html");
             }

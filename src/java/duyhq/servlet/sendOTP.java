@@ -5,13 +5,9 @@
  */
 package duyhq.servlet;
 
-import duyhq.dao.PlantDAO;
-import duyhq.dto.Plant;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author duyhu
  */
-public class searchServlet extends HttpServlet {
+public class sendOTP extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,43 +33,23 @@ public class searchServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String keyword = request.getParameter("txtsearch");
-            String searchby = request.getParameter("searchby");
-            ArrayList<Plant> list = PlantDAO.getPlants(keyword, searchby);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet sendOTP</title>");  
+            out.println("<link rel='stylesheet' href='mycss.css' type='text/css' />");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet sendOTP at " + request.getContextPath() + "</h1>");
             
-            if (list != null && !list.isEmpty()) {
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet searchServlet</title>");
-                out.println("<link rel='stylesheet' href='mycss.css' type='text/css' />");
-                out.println("</head>");
-                out.println("<body><section>");
-                
-                ServletContext context = getServletContext();
-                String tmp = context.getInitParameter("countryName");
-                out.println("<p>The website is deploying in " + tmp + "</p>");
-                
-                ServletConfig servletConfig = getServletConfig();
-                String tmp2 = servletConfig.getInitParameter("language");
-                out.println("<p>Language is used only in this page: " + tmp2 + "</p>");
-                
-                out.println("<table class='producttable'>");
-                out.println("<tr><td>Product ID</td><td>Name</td><td>Price</td><td>Image</td><td>Detail</td><td>Action</td></tr>");
-                for (Plant plant: list) {
-                    out.println("<tr>");
-                    out.println("<td>" + plant.getId() + "</td>");
-                    out.println("<td>" + plant.getName() + "</td>");
-                    out.println("<td>" + plant.getPrice() + "</td>");
-                    out.println("<td><img src='" + plant.getImgpath()+ "' class='product' /></td>");
-                    out.println("<td><a href='#'>View detail</a></td>");
-                    out.println("<td><a href='#'>Add to your cart</a></td>");
-                    out.println("</tr>");
-                }
-                out.println("</table>");
-                out.println("</section></body>");
-                out.println("</html>");
-            }
+            String email = (String)request.getAttribute("email_newAccount");
+            out.println("<p>Please, check your email: " + email + ", a confirm code was sent to you.</p>");
+            
+            RequestDispatcher rd = request.getRequestDispatcher("contactServlet");
+            rd.include(request, response);
+            
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
