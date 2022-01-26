@@ -36,12 +36,14 @@ public class mainController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String action = request.getParameter("action");
             
-            if (action != null || action.equals("")) {
+            if (action == null || action.equals("")) {
                 url = "index.jsp";
             } else if (action.equals("Login")) {
-                url = "login.jsp";
+                url = "loginServlet";
             } else if (action.equals("Register")) {
-                url = "registration.jsp";
+                url = "registerServlet";
+            } else if (action.equals("Logout")) {
+                url = "logoutServlet";
             }
             
             RequestDispatcher rd = request.getRequestDispatcher(url);

@@ -5,8 +5,6 @@
  */
 package duyhq.servlet;
 
-import duyhq.dao.AccountDAO;
-import duyhq.dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author duyhu
  */
-public class loginServlet extends HttpServlet {
+public class logoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,34 +32,10 @@ public class loginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("txtemail");
-            String password = request.getParameter("txtpassword");
-            Account acc = null;
-            
-            try {
-                acc = AccountDAO.getAccount(email, password);
-                
-                if (acc == null) {
-                    response.sendRedirect("invalid.html");
-                    return;
-                }
-                
-                if (acc.getRole() == 1) {
-                    // Redirect to admin page
-                } else {
-                    // Redirect to welcome page
-//                    response.sendRedirect("welcome.html");
-
-                    HttpSession session = request.getSession(true);
-                    if (session != null) {
-                        session.setAttribute("name", acc.getFullname());
-                        session.setAttribute("email", email);
-                        response.sendRedirect("personalPage.jsp");
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            session.invalidate();
+            response.sendRedirect("index.jsp");
         }
     }
 
