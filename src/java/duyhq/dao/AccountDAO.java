@@ -58,6 +58,42 @@ public class AccountDAO {
         return accounts;
     }
     
+    public static Account getAccountByEmail(String email) {
+        Connection cn = null;
+        Account acc = null;
+        try {
+            cn = DBUtils.makeConnection();
+
+            if (cn != null) {
+                String sql = "SELECT accId, email, password, fullname, phone, status, role FROM Accounts WHERE status = 1 AND email = ? COLLATE Latin1_General_CS_AS";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, email);
+                ResultSet rs = pst.executeQuery();
+
+                if (rs != null && rs.next()){
+                    int accId = rs.getInt("accId");
+                    String password = rs.getString("password");
+                    String fullname = rs.getString("fullname");
+                    String phone = rs.getString("phone");
+                    int status = rs.getInt("status");
+                    int role = rs.getInt("role");
+                    acc = new Account(accId, email, password, fullname, status, phone, role);
+                }
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cn != null) {
+                try {
+                    cn.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return acc;
+    }
+    
     public static Account getAccount(String email, String password) {
         Connection cn = null;
         Account acc = null;
