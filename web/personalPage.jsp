@@ -15,18 +15,19 @@
         <title>Personal page</title>
     </head>
     <body>
+        <header>
+            <%@include file="header_loginedUser.jsp" %>
+        </header>
         <%
             String name = (String) session.getAttribute("name");
             if (name == null) {
         %>
-        <p><font color="red">You must login to view personal page</font></p>
-        <p></p>
+        <p><font color="red">You must <a style="color: red; text-decoration: underline" href="login.jsp">login</a> to view personal page</font></p>
+        
         <%
         } else {
         %>
-        <header>
-            <%@include file="header_loginedUser.jsp" %>
-        </header>
+        
         <section>
             <h3>Welcome <%= name%> come back</h3>
             <h3><a href="mainController?action=Logout">Logout</a></h3>
@@ -67,11 +68,12 @@
             %>
             <p>You don't have any order</p>
         </section>
-        <footer>
-            <%@include file="footer.jsp" %>
-        </footer>
+        
         <%
             }
         %>
+        <footer>
+            <%@include file="footer.jsp" %>
+        </footer>
     </body>
 </html>
