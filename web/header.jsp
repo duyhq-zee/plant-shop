@@ -21,11 +21,13 @@
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="registration.jsp">Register</a></li>
                     <li><a href="login.jsp" >Login</a></li>
-                    <li><form action="searchServlet" method="post" class="formsearch">
-                            <input type="text" name="txtsearch">
+                    <li>
+                        <form action="mainController" method="post" class="formsearch">
+                            <input type="text" name="txtsearch" value="<%= request.getParameter("txtsearch") == null ? "" : request.getParameter("txtsearch") %>">
                             <select name="searchby"> <option value="byname">by name</option><option value="bycate">by category</option> </select>
                             <input type="submit" value="search" name="action" >
-                        </form></li>
+                        </form>
+                    </li>
                 </ul>
             </nav>
         </header>

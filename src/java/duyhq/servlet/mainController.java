@@ -18,8 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author duyhu
  */
 public class mainController extends HttpServlet {
+
     private String url = "errorpage.html";
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,8 +36,8 @@ public class mainController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String action = request.getParameter("action");
-            
-            if (action == null || action.equals("")) {
+
+            if (action == null || action.equals("") || action.equals("search")) {
                 url = "index.jsp";
             } else if (action.equals("Login")) {
                 url = "loginServlet";
@@ -45,7 +46,7 @@ public class mainController extends HttpServlet {
             } else if (action.equals("Logout")) {
                 url = "logoutServlet";
             }
-            
+
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
