@@ -15,9 +15,8 @@
         <title>Welcome</title>
     </head>
     <body>
-        <header>
-            <%@include file="header.jsp" %>
-        </header>
+        <%@include file="header.jsp" %>
+        
         <%
             String keyword = request.getParameter("txtsearch");
             String searchby = request.getParameter("searchby");
@@ -51,6 +50,8 @@
                 }
             }
         %>
+        
+        <div class="clear"></div>
         <footer>
             <%@include file="footer.jsp" %>
         </footer>

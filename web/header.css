@@ -1,0 +1,70 @@
+/* GENERAL */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ========= */
+
+.header { 
+    height: 80px;
+    background-color: #e1f5eb;
+    text-transform: uppercase;
+}
+
+.header .navbar {
+    height: 80px;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+.header li {
+    /*display: inline-block;*/
+}
+
+.header .logo {
+    width: 70px;
+    border-radius: 50%;
+}
+
+.header a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.1rem;
+    margin-right: 50px;
+}
+
+.header a:hover {
+    color: #666;
+}
+
+.header .search-form {
+    position: absolute;
+    right: 0;
+}
+
+.header .formsearch input[type="text"]{
+    width: 50%;
+    padding: 0 5px;
+    height: 24px;
+}
+
+.header .formsearch select {
+    padding: 0 5px;
+    height: 24px;
+}
+
+.header .button {
+    border: none;
+    background-color: #008000;
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+

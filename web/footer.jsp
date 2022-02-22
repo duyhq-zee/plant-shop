@@ -10,8 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="footer.css" type="text/css" />
     </head>
     <body>
-        <p style="color: white; text-align: center;">Copyright &COPY; 2021</p>
+        <footer class="footer">
+            <p class="copyright-text">Copyright &COPY; 2021</p>
+        </footer>
     </body>
 </html>
