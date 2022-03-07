@@ -86,7 +86,6 @@ public class OrderDAO {
 
                         OrderDetail orderdetail = new OrderDetail(detailID, orderID, PlantID, PlanName, price, imgPath, quantity);
                         list.add(orderdetail);
-
                     }
                 }
             }
@@ -101,6 +100,29 @@ public class OrderDAO {
         }
 
         return list;
+    }
+
+    public static boolean updateOrderStatus(int orderId, int value) {
+        Connection cn = null;
+
+        try {
+            cn = DBUtils.makeConnection();
+
+            if (cn != null) {
+                String sql = "UPDATE Orders SET [status] = ? WHERE OrderID = ?;";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, value);
+                pst.setInt(2, orderId);
+                pst.execute();
+            }
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            return true;
+        }
     }
 
 }

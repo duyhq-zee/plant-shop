@@ -11,18 +11,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="mycss.css" type="text/css" />
+        <link rel="stylesheet" href="header_loginedUser.css" type="text/css" />
     </head>
     <body>
-        <nav>
-            <li><a href="index.jsp"></a>Home</li>
-            <li><a href="">Change profile</a></li>
-            <li><a href="">Completed orders</a></li>
-            <li><a href="">Canceled orders</a></li>
-            <li><a href="">Processing orders</a></li>
-            <li>
-                From <input type="date" name="from"/> to <input type="date" name="to"/>
-                <input type="submit" value="Search"/>
-            </li>
-        </nav>
+        <header class="header">
+            <nav>
+                <ul class="navbar">
+                    <li><a href="index.jsp"><img class="logo" src="images/logo.png"></a> </li>
+                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="">Change profile</a></li>
+                    <li><a href="">Completed orders</a></li>
+                    <li><a href="">Canceled orders</a></li>
+                    <li><a href="">Processing orders</a></li>
+                    <li>
+                        From <input type="date" name="from"/> to <input type="date" name="to"/>
+                        <input type="submit" value="Search"/>
+                    </li>
+                </ul>
+            </nav>
+        </header>
     </body>
 </html>

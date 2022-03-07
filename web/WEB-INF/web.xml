@@ -36,6 +36,14 @@
         <servlet-name>logoutServlet</servlet-name>
         <servlet-class>duyhq.servlet.logoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>orderServlet</servlet-name>
+        <servlet-class>duyhq.servlet.orderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>accountServlet</servlet-name>
+        <servlet-class>duyhq.servlet.accountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>logoutServlet</servlet-name>
         <url-pattern>/logoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>orderServlet</servlet-name>
+        <url-pattern>/orderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>accountServlet</servlet-name>
+        <url-pattern>/accountServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

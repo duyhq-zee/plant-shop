@@ -4,6 +4,8 @@
     Author     : duyhu
 --%>
 
+<%@page import="duyhq.dto.Account"%>
+<%@page import="duyhq.dao.AccountDAO"%>
 <%@page import="duyhq.dto.Order"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="duyhq.dao.OrderDAO"%>
@@ -20,27 +22,57 @@
         </header>
         <%
             String name = (String) session.getAttribute("name");
+            Account user = AccountDAO.getAccountByEmail((String) session.getAttribute("email"));
             if (name == null) {
         %>
         <p><font color="red">You must <a style="color: red; text-decoration: underline" href="login.jsp">login</a> to view personal page</font></p>
-        
+
         <%
         } else {
         %>
-        
+
         <section>
             <h3>Welcome <%= name%> come back</h3>
             <h3><a href="mainController?action=Logout">Logout</a></h3>
+            <p><a href="personalPage.jsp">View all orders</a></p>
+            <p><a href="personalPage.jsp?filter=completed">View completed orders</a></p>
+            <p><a href="personalPage.jsp?filter=processing">View processing orders</a></p>
+            <p><a href="personalPage.jsp?filter=canceled">View canceled orders</a></p>
         </section>
+
+        <br/>
+        <br/>
+        <br/>
+
         <section>
+            <h3>Your information</h3>
+            <form action="accountServlet" method="POST">
+                <input type="text" name="fullname" value="<%=user.getFullname()%>"/>
+                <input type="text" name="phone" value="<%=user.getPhone()%>"/>
+                <input type="hidden" name="email" value="<%=user.getEmail()%>"/>
+                <input type="hidden" name="password" value="<%=user.getPassword()%>"/>
+                
+                <input type="submit" name="action" value="Save" />
+            </form>
+        </section>
+                
+        <br/>
+        <br/>
+        <br/>
+        
+        <section>
+            <h3>Your orders</h3>
             <!-- Orders -->
             <%
                 String email = (String) session.getAttribute("email");
                 ArrayList<Order> list = OrderDAO.getOrders(email);
                 String[] status = {"", "processing", "completed", "canceled"};
+                String filter = request.getParameter("filter");
                 if (list != null && !list.isEmpty()) {
-                    for (Order ord: list) {
+                    for (Order ord : list) {
+                        if (filter == null || filter.equals(status[ord.getStatus()])) {
             %>
+
             <table class="order">
                 <tr>
                     <td>Order ID</td>
@@ -56,19 +88,24 @@
                     <td>
                         <%= status[ord.getStatus()]%>
                         <br/>
-                        <% if (ord.getStatus() == 1) %><a href="#">Cancel order</a>
+                        <% if (ord.getStatus() == 1) {%><a href="orderServlet?action=updateOrder&orderId=<%= ord.getOrderID()%>&newStatus=3">Cancel order</a><%}%>
+                        <% if (ord.getStatus() == 3) {%><a href="orderServlet?action=updateOrder&orderId=<%= ord.getOrderID()%>&newStatus=1">Order again</a><%}%>
                     </td>
-                    <td><a href="orderDetail.jsp?orderid=<%= ord.getOrderID() %>">Detail</a></td>
+                    <td>
+                        <a href="orderDetail.jsp?orderid=<%= ord.getOrderID()%>">Detail</a>
+                    </td>
                 </tr>
             </table>
 
             <%
                     }
-                } else
+                }
+            } else {
             %>
             <p>You don't have any order</p>
+            <% } %>
         </section>
-        
+
         <%
             }
         %>
