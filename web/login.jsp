@@ -27,6 +27,9 @@
                         <td><input type="password" name="txtpassword"/></td>
                     </tr>
                     <tr>
+                        <td colspan="2"><input type="checkbox" value="savelogin" name="savelogin"/>Stay signed in</td>
+                    </tr>
+                    <tr>
                         <td colspan="2"><input type="submit" value="Login" name="action"/></td>
                     </tr>
                 </table>
