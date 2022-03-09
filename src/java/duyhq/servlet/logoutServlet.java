@@ -8,6 +8,7 @@ package duyhq.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,17 @@ public class logoutServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             session.invalidate();
+
+            Cookie[] c = request.getCookies();
+
+            if (c != null) {
+                for (Cookie aCookie : c) {
+                    if (aCookie.getName().equals("selector")) {
+                        aCookie.setMaxAge(0);
+                        response.addCookie(aCookie);
+                    }
+                }
+            }
             response.sendRedirect("index.jsp");
         }
     }

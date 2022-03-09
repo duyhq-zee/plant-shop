@@ -19,7 +19,8 @@
                 <ul class="navbar">
                     <li><a href="index.jsp"><img class="logo" src="images/logo.png"></a> </li>
                     <li><a href="index.jsp">Home</a></li>
-                    <li><a href="">Change profile</a></li>
+                    <li><a href="personalPage.jsp">Profile</a></li>
+                    <!--<li><a href="">Change profile</a></li>-->
                     <li><a href="">Completed orders</a></li>
                     <li><a href="">Canceled orders</a></li>
                     <li><a href="">Processing orders</a></li>

@@ -4,6 +4,8 @@
     Author     : duyhu
 --%>
 
+<%@page import="duyhq.dao.AccountDAO"%>
+<%@page import="duyhq.dto.Account"%>
 <%@page import="duyhq.dao.PlantDAO"%>
 <%@page import="duyhq.dto.Plant"%>
 <%@page import="java.util.ArrayList"%>
@@ -15,7 +17,38 @@
         <title>Welcome</title>
     </head>
     <body>
-        <%@include file="header.jsp" %>
+        <% 
+            String name = (String) session.getAttribute("name");
+            String email = (String) session.getAttribute("email");
+
+            Cookie[] c = request.getCookies();
+
+            boolean login = false;
+
+            Account acc = null;
+
+            String token = "";
+
+            if (c != null) {
+                for (Cookie aCookie : c) {
+                    if (aCookie.getName().equals("selector")) {
+                        token = aCookie.getValue();
+                        acc = AccountDAO.getAccountByToken(token);
+                        if (acc != null) {
+                            name = acc.getFullname();
+                            email = acc.getEmail();
+                            login = true;
+                        }
+                    }
+                }
+            }
+
+            if (!login) {
+        %>
+            <%@include file="header.jsp" %>
+        <% } else {%>
+            <%@include file="header_loginedUser.jsp" %>
+        <% } %>
         
         <%
             String keyword = request.getParameter("txtsearch");

@@ -5,6 +5,7 @@
  */
 package duyhq.dto;
 
+import duyhq.dao.AccountDAO;
 import duyhq.dao.OrderDAO;
 import java.util.ArrayList;
 
@@ -35,9 +36,11 @@ public class Test {
 //        for (Plant plant : plants) {
 //            System.out.println(plant.getName());
 //        }
-        ArrayList<OrderDetail> list = OrderDAO.getOrderDetails(1);
-        for (OrderDetail o : list) {
-            System.out.println(o.getPlantName());
-        }
+//        ArrayList<OrderDetail> list = OrderDAO.getOrderDetails(1);
+//        for (OrderDetail o : list) {
+//            System.out.println(o.getPlantName());
+//        }
+        Account acc = AccountDAO.getAccountByToken("fbzkmghltw");
+        System.out.println(acc.getEmail());
     }
 }

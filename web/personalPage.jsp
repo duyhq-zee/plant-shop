@@ -28,26 +28,22 @@
 
             boolean login = false;
 
-            Account acc = new Account();
+            Account acc = null;
 
-            if (name == null) {
-                String token = "";
+            String token = "";
 
-                if (c != null) {
-                    for (Cookie aCookie : c) {
-                        if (aCookie.getName().equals("selector")) {
-                            token = aCookie.getValue();
-                            AccountDAO.getAccountByToken(token);
-                            if (acc != null) {
-                                name = acc.getFullname();
-                                email = acc.getEmail();
-                                login = true;
-                            }
+            if (c != null) {
+                for (Cookie aCookie : c) {
+                    if (aCookie.getName().equals("selector")) {
+                        token = aCookie.getValue();
+                        acc = AccountDAO.getAccountByToken(token);
+                        if (acc != null) {
+                            name = acc.getFullname();
+                            email = acc.getEmail();
+                            login = true;
                         }
                     }
                 }
-            } else {
-                login = true;
             }
 
             if (!login) {
