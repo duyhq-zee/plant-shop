@@ -7,7 +7,6 @@ package duyhq.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author duyhu
  */
-public class mainController extends HttpServlet {
-
-    private String url = "errorpage.html";
+public class deleteFromCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,30 +32,15 @@ public class mainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String action = request.getParameter("action");
-
-            if (action == null || action.equals("") || action.equals("Search")) {
-                url = "index.jsp";
-            } else if (action.equals("Login")) {
-                url = "loginServlet";
-            } else if (action.equals("Register")) {
-                url = "registerServlet";
-            } else if (action.equals("Logout")) {
-                url = "logoutServlet";
-            } else if (action.equals("updateaccount")) {
-                url = "updateAccountServlet";
-            } else if (action.equals("addtocart")) {
-                url = "addToCartServlet";
-            } else if (action.equals("viewcart")) {
-                url = "viewCart.jsp";
-            } else if (action.equals("updatecart")) {
-                url = "updateCartServlet";
-            } else if (action.equals("deletefromcart")) {
-                url = "deleteFromCartServlet";
-            }
-
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet deleteFromCartServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet deleteFromCartServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

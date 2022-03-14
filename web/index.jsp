@@ -29,18 +29,23 @@
 
             String token = "";
 
-            if (c != null) {
-                for (Cookie aCookie : c) {
-                    if (aCookie.getName().equals("selector")) {
-                        token = aCookie.getValue();
-                        acc = AccountDAO.getAccountByToken(token);
-                        if (acc != null) {
-                            name = acc.getFullname();
-                            email = acc.getEmail();
-                            login = true;
+            if (name == null) {
+                if (c != null) {
+                    for (Cookie aCookie : c) {
+                        if (aCookie.getName().equals("selector")) {
+                            token = aCookie.getValue();
+                            acc = AccountDAO.getAccountByToken(token);
+                            if (acc != null) {
+                                name = acc.getFullname();
+                                email = acc.getEmail();
+                                login = true;
+                            }
                         }
                     }
                 }
+            } else {
+                acc = AccountDAO.getAccountByEmail(email);
+                login = true;
             }
 
             if (!login) {
@@ -75,7 +80,7 @@
                             <td>Price: <%= p.getPrice() %></td>
                             <td>Status: <%= p.getStatus() %></td>
                             <td>Category: <%= p.getCatename() %></td>
-                            <td><a href="">Add to cart</a></td>
+                            <td><a href="mainController?action=addtocart&pid=<%=p.getId()%>">Add to cart</a></td>
                         </tr>
                     </table>
                     

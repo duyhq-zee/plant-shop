@@ -7,19 +7,18 @@ package duyhq.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author duyhu
  */
-public class mainController extends HttpServlet {
-
-    private String url = "errorpage.html";
+public class updateCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,31 +33,21 @@ public class mainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String action = request.getParameter("action");
+            String pid = request.getParameter("pid");
+            String newQuantity = request.getParameter("quantity");
 
-            if (action == null || action.equals("") || action.equals("Search")) {
-                url = "index.jsp";
-            } else if (action.equals("Login")) {
-                url = "loginServlet";
-            } else if (action.equals("Register")) {
-                url = "registerServlet";
-            } else if (action.equals("Logout")) {
-                url = "logoutServlet";
-            } else if (action.equals("updateaccount")) {
-                url = "updateAccountServlet";
-            } else if (action.equals("addtocart")) {
-                url = "addToCartServlet";
-            } else if (action.equals("viewcart")) {
-                url = "viewCart.jsp";
-            } else if (action.equals("updatecart")) {
-                url = "updateCartServlet";
-            } else if (action.equals("deletefromcart")) {
-                url = "deleteFromCartServlet";
+            HttpSession session = request.getSession(true);
+            if (session != null) {
+                HashMap<String, Integer> cart = (HashMap) session.getAttribute("cart");
+                if (cart != null) {
+                    boolean found = cart.containsKey(pid);
+                    if (found) {
+                        cart.put(pid, Integer.parseInt(newQuantity));
+                        session.setAttribute("cart", cart);
+                        response.sendRedirect("viewCart.jsp");
+                    }
+                }
             }
-
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
     }
 

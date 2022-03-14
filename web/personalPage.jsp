@@ -17,9 +17,7 @@
         <title>Personal page</title>
     </head>
     <body>
-        <header>
-            <%@include file="header_loginedUser.jsp" %>
-        </header>
+
         <%
             String name = (String) session.getAttribute("name");
             String email = (String) session.getAttribute("email");
@@ -32,29 +30,35 @@
 
             String token = "";
 
-            if (c != null) {
-                for (Cookie aCookie : c) {
-                    if (aCookie.getName().equals("selector")) {
-                        token = aCookie.getValue();
-                        acc = AccountDAO.getAccountByToken(token);
-                        if (acc != null) {
-                            name = acc.getFullname();
-                            email = acc.getEmail();
-                            login = true;
+            if (name == null) {
+                if (c != null) {
+                    for (Cookie aCookie : c) {
+                        if (aCookie.getName().equals("selector")) {
+                            token = aCookie.getValue();
+                            acc = AccountDAO.getAccountByToken(token);
+                            if (acc != null) {
+                                name = acc.getFullname();
+                                email = acc.getEmail();
+                                login = true;
+                            }
                         }
                     }
                 }
+            } else {
+                acc = AccountDAO.getAccountByEmail(email);
+                login = true;
             }
 
             if (!login) {
         %>
+        <%@include file="header.jsp" %>
         <p><font color="red">You must <a style="color: red; text-decoration: underline" href="login.jsp">login</a> to view
             personal page</font></p>
 
         <%
         } else {
         %>
-
+        <%@include file="header_loginedUser.jsp" %>
         <section>
             <h3>Welcome <%= name%> come back</h3>
             <h3><a href="mainController?action=Logout">Logout</a></h3>
@@ -70,13 +74,12 @@
 
         <section>
             <h3>Your information</h3>
-            <form action="accountServlet" method="POST">
+            <form action="mainController" method="POST">
                 <input type="text" name="fullname" value="<%=acc.getFullname()%>"/>
                 <input type="text" name="phone" value="<%=acc.getPhone()%>"/>
                 <input type="hidden" name="email" value="<%=acc.getEmail()%>"/>
                 <input type="hidden" name="password" value="<%=acc.getPassword()%>"/>
-
-                <input type="submit" name="action" value="Save"/>
+                <button type="submit" name="action" value="updateaccount">Save</button>
             </form>
         </section>
 

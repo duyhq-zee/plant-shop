@@ -20,6 +20,7 @@
                 <ul class="navbar">
                     <li><a href="index.jsp"><img class="logo" src="images/logo.png"></a> </li>
                     <li><a href="index.jsp">Home</a></li>
+                    <li><a href="viewCart.jsp">Cart</a></li>
                     <li><a href="registration.jsp">Register</a></li>
                     <li><a href="login.jsp" >Login</a></li>
                     <li class="search-form">

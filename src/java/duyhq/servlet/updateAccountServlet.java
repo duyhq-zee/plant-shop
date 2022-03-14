@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author duyhu
  */
-public class accountServlet extends HttpServlet {
+public class updateAccountServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +33,15 @@ public class accountServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String action = request.getParameter("action");
-            if (action.equals("Save")) {
-                String fullname = request.getParameter("fullname");
-                String phone = request.getParameter("phone");
-                String email = request.getParameter("email");
-                String password = request.getParameter("password");
+            String fullname = request.getParameter("fullname");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
 
-                AccountDAO.updateAccount(email, password, fullname, phone);
+            AccountDAO.updateAccount(email, password, fullname, phone);
 
-                response.sendRedirect("personalPage.jsp");
-            }
+            response.sendRedirect("personalPage.jsp");
+
         }
     }
 

@@ -41,8 +41,20 @@
         <servlet-class>duyhq.servlet.orderServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>accountServlet</servlet-name>
-        <servlet-class>duyhq.servlet.accountServlet</servlet-class>
+        <servlet-name>updateAccountServlet</servlet-name>
+        <servlet-class>duyhq.servlet.updateAccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addToCartServlet</servlet-name>
+        <servlet-class>duyhq.servlet.addToCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateCartServlet</servlet-name>
+        <servlet-class>duyhq.servlet.updateCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteFromCartServlet</servlet-name>
+        <servlet-class>duyhq.servlet.deleteFromCartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
@@ -77,8 +89,20 @@
         <url-pattern>/orderServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>accountServlet</servlet-name>
-        <url-pattern>/accountServlet</url-pattern>
+        <servlet-name>updateAccountServlet</servlet-name>
+        <url-pattern>/updateAccountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addToCartServlet</servlet-name>
+        <url-pattern>/addToCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateCartServlet</servlet-name>
+        <url-pattern>/updateCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteFromCartServlet</servlet-name>
+        <url-pattern>/deleteFromCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
