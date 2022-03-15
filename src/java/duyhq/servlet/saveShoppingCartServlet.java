@@ -5,6 +5,7 @@
  */
 package duyhq.servlet;
 
+import duyhq.dao.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author duyhu
  */
-public class deleteFromCartServlet extends HttpServlet {
+public class saveShoppingCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,19 +34,36 @@ public class deleteFromCartServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String pid = request.getParameter("pid");
+            HttpSession session = request.getSession();
 
-            HttpSession session = request.getSession(true);
             if (session != null) {
-                HashMap<String, Integer> cart = (HashMap) session.getAttribute("cart");
-                if (cart != null) {
-                    boolean found = cart.containsKey(pid);
-                    if (found) {
-                        cart.remove(pid);
-                        session.setAttribute("cart", cart);
-                        response.sendRedirect("viewCart.jsp");
+                String name = (String) session.getAttribute("name");
+                String email = (String) session.getAttribute("email");
+
+                HashMap<String, Integer> cart = (HashMap<String, Integer>) session.getAttribute("cart");
+                if (cart != null && !cart.isEmpty()) {
+
+                    if (name == null || name.equals("")) {// Not logged in
+                        request.setAttribute("WARNING", "You must logged in to finish the shopping");
+                        request.getRequestDispatcher("viewCart.jsp").forward(request, response);
+                    } else {
+                        boolean result = OrderDAO.insertOrder(email, cart);
+
+                        if (result) {
+                            session.setAttribute("cart", null);
+                            request.setAttribute("WARNING", "Save your cart successfully");
+                            request.getRequestDispatcher("viewCart.jsp").forward(request, response);
+                        } else {
+                            request.setAttribute("WARNING", "These products are out of stock");
+                            request.getRequestDispatcher("viewCart.jsp").forward(request, response);
+                        }
                     }
+                } else {
+                    request.setAttribute("WARNING", "Your cart is empty");
+                    request.getRequestDispatcher("viewCart.jsp").forward(request, response);
                 }
+            } else {
+                response.sendRedirect("index.jsp");
             }
         }
     }

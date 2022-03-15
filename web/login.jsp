@@ -49,11 +49,12 @@
                 response.sendRedirect("personalPage.jsp");
             }
         %>
-        <header>
-            <%@include file="header.jsp" %>
-        </header>
+        
+        <%@include file="header.jsp" %>
+        
         <section>
             <form action="mainController" method="post" class="formlogin">
+                <font style="color: red;"><%= (request.getAttribute("WARNING") == null) ? "" : (String)request.getAttribute("WARNING")%></font>
                 <table>
                     <tr>
                         <td>Email: </td>

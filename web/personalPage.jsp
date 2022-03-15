@@ -75,8 +75,10 @@
         <section>
             <h3>Your information</h3>
             <form action="mainController" method="POST">
-                <input type="text" name="fullname" value="<%=acc.getFullname()%>"/>
-                <input type="text" name="phone" value="<%=acc.getPhone()%>"/>
+                <label for="fullname">Full name</label>
+                <input type="text" id="fullname" name="fullname" value="<%=acc.getFullname()%>"/>
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" value="<%=acc.getPhone()%>"/>
                 <input type="hidden" name="email" value="<%=acc.getEmail()%>"/>
                 <input type="hidden" name="password" value="<%=acc.getPassword()%>"/>
                 <button type="submit" name="action" value="updateaccount">Save</button>

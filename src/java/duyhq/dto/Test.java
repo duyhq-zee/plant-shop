@@ -5,9 +5,8 @@
  */
 package duyhq.dto;
 
-import duyhq.dao.AccountDAO;
 import duyhq.dao.OrderDAO;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -40,7 +39,11 @@ public class Test {
 //        for (OrderDetail o : list) {
 //            System.out.println(o.getPlantName());
 //        }
-        Account acc = AccountDAO.getAccountByToken("fbzkmghltw");
-        System.out.println(acc.getEmail());
+//        Account acc = AccountDAO.getAccountByToken("fbzkmghltw");
+//        System.out.println(acc.getEmail());
+        HashMap<String, Integer> cart = new HashMap<>();
+        cart.put("1", 3);
+        cart.put("2", 4);
+        OrderDAO.insertOrder("test@gmail.com", cart);
     }
 }

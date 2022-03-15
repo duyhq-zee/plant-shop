@@ -55,6 +55,8 @@ public class mainController extends HttpServlet {
                 url = "updateCartServlet";
             } else if (action.equals("deletefromcart")) {
                 url = "deleteFromCartServlet";
+            } else if (action.equals("saveOrder")) {
+                url = "saveShoppingCartServlet";
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);

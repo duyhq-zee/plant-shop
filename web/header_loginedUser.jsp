@@ -21,6 +21,7 @@
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="viewCart.jsp">Cart</a></li>
                     <li><a href="personalPage.jsp">Profile</a></li>
+                    <li><a href="mainController?action=logout">Logout</a></li>
                     <!--<li><a href="">Change profile</a></li>-->
                     <!--<li><a href="">Completed orders</a></li>
                     <li><a href="">Canceled orders</a></li>

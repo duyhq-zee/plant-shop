@@ -14,6 +14,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  *
@@ -123,6 +127,83 @@ public class OrderDAO {
         } finally {
             return true;
         }
+    }
+
+    public static boolean insertOrder(String email, HashMap<String, Integer> cart) {
+        Connection cn = null;
+        boolean result = false;
+        try {
+            cn = DBUtils.makeConnection();
+
+            if (cn != null) {
+                int accId = 0, orderId = 0;
+                cn.setAutoCommit(false);
+
+                // get accountId by email
+                String sql = "SELECT accID from Accounts WHERE Accounts.email = ?;";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, email);
+                ResultSet rs = pst.executeQuery();
+
+                if (rs != null && rs.next()) {
+                    accId = rs.getInt("accID");
+                }
+
+                // Insert a new Order
+                Date d = new Date(System.currentTimeMillis());
+                sql = "INSERT Orders(OrdDate, status, accID) VALUES (?, ?, ?);";
+                pst = cn.prepareStatement(sql);
+                pst.setDate(1, d);
+                pst.setInt(2, 1);
+                pst.setInt(3, accId);
+
+                pst.executeUpdate();
+
+                // get orderId that is the largest number
+                sql = "SELECT TOP 1 orderId FROM Orders ORDER BY orderId DESC";
+                pst = cn.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                if (rs != null && rs.next()) {
+                    orderId = rs.getInt("orderID");
+                }
+
+                // Insert OrderDetail
+                Set<String> pids = cart.keySet();
+                for (String pid : pids) {
+                    sql = "INSERT OrderDetails VALUES (?, ?, ?);";
+                    pst = cn.prepareStatement(sql);
+                    pst.setInt(1, orderId);
+                    pst.setInt(2, Integer.parseInt(pid.trim()));
+                    pst.setInt(3, cart.get(pid));
+                    pst.executeUpdate();
+                }
+
+                cn.commit();
+                cn.setAutoCommit(true);
+
+                return true;
+            }
+        } catch (Exception e) {
+            try {
+                if (cn != null) {
+                    cn.rollback();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return result;
     }
 
 }
