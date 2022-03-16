@@ -83,7 +83,7 @@
             <form action="mainController" method="POST">
                 <tr>
                     <td><img src="<%= p.getImgpath() %>" width="100px"/></td>
-                    <td><input type="hidden" value="<%= pid %>" name="pid"/><a href="productDetail.jsp?pid=<%= pid %>"><%= pid %></a></td>
+                    <td><input type="hidden" value="<%= pid %>" name="pid"/><a href="getPlantServlet?pid=<%= pid %>"><%= pid %></a></td>
                     <td><a><%= p.getName() %></a></td>
                     <td><p><%= p.getPrice() %></p></td>
                     <td><input type="number" value="<%= quantity %>" name="quantity"/></td>

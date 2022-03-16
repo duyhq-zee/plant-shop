@@ -54,22 +54,28 @@
             <%@include file="header_loginedUser.jsp" %>
         <% } %>
         
-        <%
-            String pid = request.getParameter("pid");
-            Plant p = PlantDAO.getPlant(pid);
-        %>
+        
+        <jsp:useBean id="plantObj" class="duyhq.dto.Plant" scope="request"/>
         <table width="100%" class="shopping">
             <tr>
                 <td></td>
                 <td>Product id</td>
                 <td>Product name</td>
                 <td>Unit price</td>
+                <td>Description</td>
+                <td>Status</td>
+                <td>Category Id</td>
+                <td>Category name</td>
             </tr>
             <tr>
-                <td><img src="<%= p.getImgpath() %>" width="100px"/></td>            
-                <td><p><%= pid %></p></td>
-                <td><p><%= p.getName() %></p></td>
-                <td><p><%= p.getPrice() %></p></td>
+                <td><img src="${plantObj.imgpath}" width="100px"/></td>            
+                <td><p>${plantObj.id}</p></td>
+                <td><p>${plantObj.name}</p></td>
+                <td><p>${plantObj.price}</p></td>
+                <td><p>${plantObj.description}</p></td>
+                <td><p>${plantObj.status}</p></td>
+                <td><p>${plantObj.cateid}</p></td>
+                <td><p>${plantObj.catename}</p></td>
             </tr>        
         </table>
         <%@include file="footer.jsp" %>

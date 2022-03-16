@@ -5,11 +5,14 @@
  */
 package duyhq.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author duyhu
  */
-public class Plant {
+public class Plant implements Serializable {
+
     private int id;
     private String name;
     private int price;
@@ -92,5 +95,5 @@ public class Plant {
 
     public void setCatename(String catename) {
         this.catename = catename;
-    }  
+    }
 }
