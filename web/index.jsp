@@ -47,6 +47,10 @@
                 acc = AccountDAO.getAccountByEmail(email);
                 login = true;
             }
+            
+            if (login && acc.getRole() == 1) {
+                response.sendRedirect("adminIndex.jsp");
+            }
 
             if (!login) {
         %>

@@ -48,6 +48,10 @@
                 acc = AccountDAO.getAccountByEmail(email);
                 login = true;
             }
+            
+            if (login && acc.getRole() == 1) {
+                response.sendRedirect("adminIndex.jsp");
+            }
 
             if (!login) {
         %>
@@ -144,8 +148,6 @@
         <%
             }
         %>
-        <footer>
-            <%@include file="footer.jsp" %>
-        </footer>
+        <%@include file="footer.jsp" %>
     </body>
 </html>

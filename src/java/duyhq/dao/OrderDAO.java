@@ -206,4 +206,43 @@ public class OrderDAO {
         return result;
     }
 
+    public static ArrayList<Order> getAllOrders() {
+        Connection cn = null;
+        ArrayList<Order> orders = new ArrayList<Order>();
+        try {
+            cn = DBUtils.makeConnection();
+
+            if (cn != null) {
+
+                String sql = "SELECT accID, orderID, ordDate, shipDate, status, accID FROM Orders";
+
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+
+                if (rs != null) {
+                    while (rs.next()) {
+                        int accID = rs.getInt("accID");
+                        int orderID = rs.getInt("orderID");
+                        String orderDate = rs.getString("ordDate");
+                        String shipDate = rs.getString("shipDate");
+                        int status = rs.getInt("status");
+
+                        Order newOrder = new Order(orderID, orderDate, shipDate, status, accID);
+
+                        orders.add(newOrder);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            if (cn != null) {
+                try {
+                    cn.close();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+
+        return orders;
+    }
 }

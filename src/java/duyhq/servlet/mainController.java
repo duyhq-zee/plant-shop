@@ -57,6 +57,12 @@ public class mainController extends HttpServlet {
                 url = "deleteFromCartServlet";
             } else if (action.equals("saveOrder")) {
                 url = "saveShoppingCartServlet";
+            } else if (action.equals("manageAccounts")) {
+                url = "manageAccounts.jsp";
+            } else if (action.equals("updateAccountStatus")) {
+                url = "updateAccountStatusServlet";
+            } else if (action.equals("searchAccount")) {
+                url = "searchAccountServlet";
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);

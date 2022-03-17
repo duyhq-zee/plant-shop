@@ -5,11 +5,14 @@
  */
 package duyhq.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author duyhu
  */
-public class Account {
+public class Account implements Serializable {
+
     private int accId;
     private String email;
     private String password;
@@ -27,7 +30,7 @@ public class Account {
         this.phone = "";
         this.role = 0;
     }
-    
+
     public Account(int accId, String email, String password, String fullname, int status, String phone, int role) {
         this.accId = accId;
         this.email = email;
@@ -93,6 +96,5 @@ public class Account {
     public void setRole(int role) {
         this.role = role;
     }
-    
-    
+
 }

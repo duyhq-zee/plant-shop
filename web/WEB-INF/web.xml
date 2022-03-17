@@ -64,6 +64,14 @@
         <servlet-name>getPlantServlet</servlet-name>
         <servlet-class>getPlantServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateAccountStatusServlet</servlet-name>
+        <servlet-class>duyhq.servlet.updateAccountStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>searchAccountServlet</servlet-name>
+        <servlet-class>duyhq.servlet.searchAccountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
@@ -119,6 +127,14 @@
     <servlet-mapping>
         <servlet-name>getPlantServlet</servlet-name>
         <url-pattern>/getPlantServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateAccountStatusServlet</servlet-name>
+        <url-pattern>/updateAccountStatusServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searchAccountServlet</servlet-name>
+        <url-pattern>/searchAccountServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

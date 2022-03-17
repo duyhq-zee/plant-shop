@@ -5,11 +5,13 @@
  */
 package duyhq.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author duyhu
  */
-public class OrderDetail {
+public class OrderDetail implements Serializable {
 
     private int orderDetailID;
     private int orderID;

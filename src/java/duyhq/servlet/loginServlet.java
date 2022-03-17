@@ -66,38 +66,39 @@ public class loginServlet extends HttpServlet {
                         return;
                     }
 
+                    HttpSession session = request.getSession(true);
+                    if (session != null) {
+                        session.setAttribute("name", acc.getFullname());
+                        session.setAttribute("email", email);
+
+                        if (save != null) {
+                            // Generate random string
+                            int leftLimit = 97; // letter 'a'
+                            int rightLimit = 122; // letter 'z'
+                            int targetStringLength = 10;
+                            Random random = new Random();
+                            StringBuilder buffer = new StringBuilder(targetStringLength);
+                            for (int i = 0; i < targetStringLength; i++) {
+                                int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
+                                buffer.append((char) randomLimitedInt);
+                            }
+                            String generatedString = buffer.toString();
+
+                            String token = generatedString;
+                            AccountDAO.updateToken(token, email);
+                            Cookie cookie = new Cookie("selector", token);
+                            cookie.setMaxAge(60 * 2);
+                            response.addCookie(cookie);
+                        }
+                    }
+
                     if (acc.getRole() == 1) {
-                        // Redirect to admin page
+                        response.sendRedirect("adminIndex.jsp");
                     } else {
                         // Redirect to welcome page
 //                    response.sendRedirect("welcome.html");
 
-                        HttpSession session = request.getSession(true);
-                        if (session != null) {
-                            session.setAttribute("name", acc.getFullname());
-                            session.setAttribute("email", email);
-
-                            if (save != null) {
-                                // Generate random string
-                                int leftLimit = 97; // letter 'a'
-                                int rightLimit = 122; // letter 'z'
-                                int targetStringLength = 10;
-                                Random random = new Random();
-                                StringBuilder buffer = new StringBuilder(targetStringLength);
-                                for (int i = 0; i < targetStringLength; i++) {
-                                    int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
-                                    buffer.append((char) randomLimitedInt);
-                                }
-                                String generatedString = buffer.toString();
-
-                                String token = generatedString;
-                                AccountDAO.updateToken(token, email);
-                                Cookie cookie = new Cookie("selector", token);
-                                cookie.setMaxAge(60 * 2);
-                                response.addCookie(cookie);
-                            }
-                            response.sendRedirect("personalPage.jsp");
-                        }
+                        response.sendRedirect("personalPage.jsp");
                     }
                 }
             } catch (Exception e) {
@@ -106,7 +107,7 @@ public class loginServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
