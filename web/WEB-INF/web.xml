@@ -62,7 +62,7 @@
     </servlet>
     <servlet>
         <servlet-name>getPlantServlet</servlet-name>
-        <servlet-class>getPlantServlet</servlet-class>
+        <servlet-class>duyhq.servlet.getPlantServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>updateAccountStatusServlet</servlet-name>

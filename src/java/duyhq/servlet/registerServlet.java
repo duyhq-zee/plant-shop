@@ -43,7 +43,7 @@ public class registerServlet extends HttpServlet {
             if (AccountDAO.insertAccount(email, password, fullname, phone, status, role)) {
 //                response.sendRedirect("index.html");
                 request.setAttribute("email_newAccount", email);
-                RequestDispatcher rd = request.getRequestDispatcher("sendOTP");
+                RequestDispatcher rd = request.getRequestDispatcher("sendOTP.jsp");
                 rd.forward(request, response);
             } else {
                 response.sendRedirect("errorpage.html");

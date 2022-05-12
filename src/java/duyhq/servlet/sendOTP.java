@@ -36,18 +36,18 @@ public class sendOTP extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet sendOTP</title>");  
+            out.println("<title>Servlet sendOTP</title>");
             out.println("<link rel='stylesheet' href='mycss.css' type='text/css' />");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet sendOTP at " + request.getContextPath() + "</h1>");
-            
-            String email = (String)request.getAttribute("email_newAccount");
+//            out.println("<h1>Servlet sendOTP at " + request.getContextPath() + "</h1>");
+
+            String email = (String) request.getAttribute("email_newAccount");
             out.println("<p>Please, check your email: " + email + ", a confirm code was sent to you.</p>");
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("contactServlet");
             rd.include(request, response);
-            
+
             out.println("</body>");
             out.println("</html>");
         }

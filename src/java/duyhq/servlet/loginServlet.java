@@ -62,7 +62,7 @@ public class loginServlet extends HttpServlet {
                     acc = AccountDAO.getAccount(email, password);
 
                     if (acc == null) {
-                        response.sendRedirect("error.html");
+                        response.sendRedirect("errorpage.html");
                         return;
                     }
 
